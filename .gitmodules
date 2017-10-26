@@ -1,0 +1,3 @@
+[submodule "laradock-cricket-scorer"]
+	path = laradock-cricket-scorer
+	url = https://github.com/gordonbanderson/laradock-cricket-scorer.git
