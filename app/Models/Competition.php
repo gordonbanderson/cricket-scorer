@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ground extends Model
+class Competition extends Model
 {
-    protected $table = 'grounds';
+    protected $table = 'competitions';
 
     protected $fillable = [
         'name',
-        'description',
-        'location'
+        'description'
     ];
 }
