@@ -1,0 +1,1 @@
+{{$match->homeTeam->name}} v {{$match->awayTeam->name}}, {{$match->match_date->format('l jS \\of F Y h:i:s A')}}
