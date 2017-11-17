@@ -5,16 +5,18 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
-class Ground extends Model
+class Fixture extends Model
 {
     use Sluggable;
 
-    protected $table = 'grounds';
+    protected $table = 'fixtures';
 
     protected $fillable = [
         'name',
         'description',
-        'location'
+        'date',
+        'ground_id',
+        'league_id'
     ];
 
     /**
@@ -29,10 +31,5 @@ class Ground extends Model
                 'source' => 'name'
             ]
         ];
-    }
-
-    public function matches()
-    {
-        return $this->hasMany('App\Models\Match');
     }
 }
