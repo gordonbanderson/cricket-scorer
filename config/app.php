@@ -230,7 +230,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         // themes
-        'Theme' => Igaster\LaravelTheme\Facades\Theme::class
+        'Theme' => Igaster\LaravelTheme\Facades\Theme::class,
+
+        // markdown
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
 
     ],
 
