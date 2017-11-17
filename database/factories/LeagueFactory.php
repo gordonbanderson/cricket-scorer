@@ -13,11 +13,10 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Models\Ground::class, function (Faker $faker) {
-    $point = new \Phaza\LaravelPostgis\Geometries\Point($faker->latitude, $faker->longitude);
+$factory->define(App\Models\League::class, function (Faker $faker) {
     return [
-        'name' => $faker->company . ' Ground',
+        'name' => $faker->company . ' League',
         'description' => $faker->paragraph(),
-        //'location' => $point
+        'competition_id' => rand(1, DatabaseSeeder::NUMBER_OF_COMPETITIONS),
     ];
 });

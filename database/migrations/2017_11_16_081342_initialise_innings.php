@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFieldsToGrounds extends Migration
+class InitialiseInnings extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class AddFieldsToGrounds extends Migration
      */
     public function up()
     {
-        \DB::statement('CREATE EXTENSION postgis;');
-        Schema::create('grounds', function (Blueprint $table) {
+        Schema::create('innings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('description')->default('');
-            $table->point('location')->nullable();
             $table->timestamps();
+
+            $table->integer('scorecard_id')->unsigned();
+            $table->integer('order')->unsigned();
+
+            // foreign keys
+            $table->foreign('scorecard_id')->references('id')->on('scorecards');
         });
     }
 
@@ -30,6 +32,6 @@ class AddFieldsToGrounds extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grounds');
+        Schema::drop('innings');
     }
 }

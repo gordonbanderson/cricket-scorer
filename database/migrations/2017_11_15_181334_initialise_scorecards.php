@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFieldsToGrounds extends Migration
+class InitialiseScorecards extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class AddFieldsToGrounds extends Migration
      */
     public function up()
     {
-        \DB::statement('CREATE EXTENSION postgis;');
-        Schema::create('grounds', function (Blueprint $table) {
+        Schema::create('scorecards', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('description')->default('');
-            $table->point('location')->nullable();
             $table->timestamps();
+
+            $table->integer('match_id')->unsigned();
+
+            // foreign keys
+            $table->foreign('match_id')->references('id')->on('matches');
         });
     }
 
@@ -30,6 +31,6 @@ class AddFieldsToGrounds extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grounds');
+        Schema::drop('scorecards');
     }
 }

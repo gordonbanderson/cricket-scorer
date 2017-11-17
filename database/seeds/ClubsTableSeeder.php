@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class GroundsTableSeeder extends Seeder
+class ClubsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class GroundsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Ground::class, DatabaseSeeder::NUMBER_OF_GROUNDS)->create();
+        factory(App\Models\Club::class, DatabaseSeeder::NUMBER_OF_CLUBS)->create();
     }
 }

@@ -13,11 +13,9 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Models\Ground::class, function (Faker $faker) {
-    $point = new \Phaza\LaravelPostgis\Geometries\Point($faker->latitude, $faker->longitude);
+$factory->define(App\Models\Competition::class, function (Faker $faker) {
     return [
-        'name' => $faker->company . ' Ground',
+        'name' => $faker->city . ' Cricket Competition',
         'description' => $faker->paragraph(),
-        //'location' => $point
     ];
 });

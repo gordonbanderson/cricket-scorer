@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFieldsToGrounds extends Migration
+class InitialiseClubs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class AddFieldsToGrounds extends Migration
      */
     public function up()
     {
-        \DB::statement('CREATE EXTENSION postgis;');
-        Schema::create('grounds', function (Blueprint $table) {
+        Schema::create('clubs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->text('description')->default('');
-            $table->point('location')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class AddFieldsToGrounds extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grounds');
+        Schema::dropIfExists('clubs');
     }
 }
