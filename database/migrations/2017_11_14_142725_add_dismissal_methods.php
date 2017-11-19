@@ -30,12 +30,14 @@ class AddDismissalMethods extends Migration
         DismissalMethod::create(['short_name' => 'otf', 'long_name' => 'obstructing the field']);
         DismissalMethod::create(['short_name' => 'dnb', 'long_name' => 'did not bat']);
         DismissalMethod::create(['short_name' => 'r/o', 'long_name' => 'run out']);
-        DismissalMethod::create(['short_name' => 'r/h', 'long_name' => 'retired hurt']);
-        DismissalMethod::create(['short_name' => 'r/o', 'long_name' => 'leg before wicket']);
+        DismissalMethod::create(['short_name' => 'rth', 'long_name' => 'retired hurt']);
+        DismissalMethod::create(['short_name' => 'lbw', 'long_name' => 'leg before wicket']);
         DismissalMethod::create(['short_name' => 'hw', 'long_name' => 'hit wicket']);
         DismissalMethod::create(['short_name' => 'hbt', 'long_name' => 'hit the ball twice']);
         DismissalMethod::create(['short_name' => 't/o', 'long_name' => 'timed out']);
         DismissalMethod::create(['short_name' => 'n/o', 'long_name' => 'not out']);
+        DismissalMethod::create(['short_name' => 'rto', 'long_name' => 'retired out']);
+
     }
 
     /**
