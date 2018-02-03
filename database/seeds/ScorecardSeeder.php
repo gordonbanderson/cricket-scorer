@@ -15,7 +15,7 @@ class ScorecardSeeder extends Seeder
         /**
          * @param $match \App\Models\Match
          */
-        foreach (\App\Models\Match::all() as $match) {
+        foreach (\App\Models\Match::where('match_date', '<', Carbon\Carbon::now())->get() as $match) {
             $scorecard = \App\Models\Scorecard::create([
                 'match_id' => $match->id
             ]);
@@ -28,24 +28,54 @@ class ScorecardSeeder extends Seeder
 
             /** @var \App\Models\Team $hometeam */
             $hometeam = $match->homeTeam;
-            $players = $hometeam->players()->limit(11)->get();
+            $awayTeam = $match->awayTeam;
+            $hometeamPlayers = $hometeam->players()->limit(11)->get();
+
+            // 6 the allrounder, 7 keepers, 8 to 11 bowlers
+            $awayTeamIds = $awayTeam->players->pluck('id')->toArray();
+            $bowlerIds = [$awayTeamIds[5],$awayTeamIds[7],$awayTeamIds[8],$awayTeamIds[9], $awayTeamIds[10] ];
+            $keeper = \App\Models\Player::find($awayTeamIds[6]);
+
             $nBatted = rand(4,11);
             $ctr = 0;
-            foreach($players as $player) {
+            foreach($hometeamPlayers as $player) {
                 $ctr++;
-                error_log('SC: ' . $player->name );
-                $battingInnings = \App\Models\InningsBatsman::create([
-                    'batsman_id' => 'player_id',
-                    'position' => $ctr,
-                    'team_id' => $hometeam->id,
-                    'match_id' => $match->id,
-                    'time_start' => null,
-                    'time_finished' => null,
-                    ]);
+                $runs = rand(0, 120);
+
+                $bowler = \App\Models\Player::find($bowlerIds[array_rand($bowlerIds)]);
+                $fielder = \App\Models\Player::find($awayTeamIds[array_rand($awayTeamIds)]);
+
+                $factory = new \App\Factories\DismissalsFactory($match, $innings, $ctr, $runs, $player,
+                    $bowler, #bowler
+                    $fielder, #fielder,
+                    null #balls faced
+                );
                 if ($ctr <= $nBatted) {
+                    // potential for refactor here...
+                    // @todo add rarer forms of dismissal
+                    $random = rand(0,100);
+                    if ($random < 20) {
+                        $factory->bowled();
+                    } elseif ($random < 65) {
+                        $factory->caught();
+                    } elseif ($random < 75) {
+                        $factory->runOut();
+                    } elseif ($random < 80) {
+                        // need the keeper here
+                        $factory = new \App\Factories\DismissalsFactory($match, $innings, $ctr, $runs, $player,
+                            $bowler, #bowler
+                            $keeper,
+                            null #balls faced
+                        );
+                        $factory->stumped();
+                    } elseif ($random < 90) {
+                        $factory->runOut();
+                    } elseif ($random<100) {
+                        $factory->legBeforeWicket();
+                    }
 
                 } else {
-                    // did not bat
+                    $factory->didNotBat();
                 }
 
                 /*

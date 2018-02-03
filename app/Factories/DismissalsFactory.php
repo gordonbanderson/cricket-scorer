@@ -53,6 +53,7 @@ class DismissalsFactory
      */
     public function __construct($match, $innings, $position, $runs, $batsman, $bowler, $fielder, $balls_faced)
     {
+        $this->match = $match;
         $this->batsman = $batsman;
         $this->bowler = $bowler;
         $this->fielder = $fielder;
@@ -82,7 +83,8 @@ class DismissalsFactory
 
     public function didNotBat()
     {
-        $innings = new DidNotBat($this->match, $this->innings, $this->position, $this->runs, $this->batsman, $this->bowler, $this->fielder, $this->balls_faced);
+        // did not bat is no runs
+        $innings = new DidNotBat($this->match, $this->innings, $this->position, 0, $this->batsman, $this->bowler, $this->fielder, $this->balls_faced);
         return $innings->createBattingInnings();
     }
 

@@ -17,6 +17,6 @@ $factory->define(App\Models\Player::class, function (Faker $faker) {
     return [
         'name' => $faker->name(),
         'profile' => $faker->paragraph(),
-        'image_url' => $faker->imageUrl()
+        'image_url' => $faker->imageUrl(640,480,'people')
     ];
 });

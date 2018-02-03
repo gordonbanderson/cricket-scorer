@@ -10,6 +10,7 @@ class Innings extends Model
 
     protected $fillable = [
         'scorecard_id',
-        'order'
+        'order',
+        // @todo team_id?
         ];
 }

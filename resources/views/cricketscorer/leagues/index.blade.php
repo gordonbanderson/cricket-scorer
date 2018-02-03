@@ -28,7 +28,7 @@
                         <ul class="list-group media-list media-list-stream">
                             <h2>Fixtures (@todo fixtures, results, live)</h2>
                             <ul>
-                                @foreach($league->matches as $fixture)
+                                @foreach($fixtures as $fixture)
                                     <li>
                                     <a href="/competition/{{$competition->slug}}/league/{{$league->slug}}/match/{{$fixture->slug}}">
                                         @include('_partials._match_title', array('match' => $fixture))

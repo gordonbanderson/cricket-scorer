@@ -36,6 +36,7 @@ abstract class AbstractDismissal
 
     public function __construct($match, $innings, $position, $runs, $batsman, $bowler=null, $fielder=null, $balls_faced = null)
     {
+        $this->match = $match;
         $this->batsman = $batsman;
         $this->bowler = $bowler;
         $this->fielder = $fielder;
@@ -53,11 +54,11 @@ abstract class AbstractDismissal
     public function createBattingInnings()
     {
         return InningsBatsman::create([
-            'match_id' => $this->match->id,
+            //'match_id' => $this->match->id,
             'position' => $this->position,
             'batsman_id' => $this->batsman->id,
             'bowler_id' => !empty($this->bowler) ? $this->bowler->id : null,
-            'assisting_player_id' => !empty($this->fielder) ? $this->fielder->id : null,
+            'fielder_id' => !empty($this->fielder) ? $this->fielder->id : null,
             'dismissable_method_id' => $this->getDismissalId(),
             'innings_id' => $this->innings->id,
             'runs' => $this->runs,

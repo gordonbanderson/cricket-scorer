@@ -7,19 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class InningsBatsman extends Model
 {
-    use Sluggable;
-
     protected $table = 'innings_batsman';
 
     protected $fillable = [
         'batsman_id',
         'position',
-        'team_id',
-        'match_id', #needed?
         'time_start',
         'time_finish',
         'how_out',
-        'assisting_player_id',
+        'fielder_id',
         'bowler_id',
         'runs',
         'balls_faced',
@@ -33,7 +29,7 @@ class InningsBatsman extends Model
 
     public function assistingPlayer()
     {
-        return $this->belongsTo('App\Models\Player', 'assisting_player_id');
+        return $this->belongsTo('App\Models\Player', 'fielder_id');
     }
 
     public function bowler()
@@ -46,17 +42,4 @@ class InningsBatsman extends Model
         return $this->belongsTo('App\Models\Player', 'batsmanid');
     }
 
-    /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'position' // @todo Fix
-            ]
-        ];
-    }
 }
